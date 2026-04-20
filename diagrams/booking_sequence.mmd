@@ -1,0 +1,16 @@
+%% Sequence diagram for booking flow
+sequenceDiagram
+    participant U as User
+    participant F as Frontend
+    participant C as MovieController
+    participant DB as Database
+    participant Q as Queue
+    participant Mail as MailService
+
+    U->>F: fill booking form and submit
+    F->>C: POST /save-ticket
+    C->>DB: create Booking, create Tickets
+    C->>Q: dispatch SendTicketEmail job
+    Q->>Mail: send email with ticket + QR
+    Mail-->>U: deliver email with ticket
+    C-->>F: return success / redirect to /my-tickets

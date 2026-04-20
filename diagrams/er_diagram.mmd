@@ -1,0 +1,9 @@
+%% ER diagram for QlyverAppHim
+erDiagram
+    USERS ||--o{ BOOKINGS : makes
+    BOOKINGS ||--o{ TICKETS : contains
+    MOVIES ||--o{ SHOWTIMES : has
+    CINEMAS ||--o{ SHOWTIMES : hosts
+    SHOWTIMES ||--o{ SEATS : has
+    TICKETS }o--|| SEATS : reserved_by
+    USERS ||--o{ TICKETS : "owns/holds"
