@@ -193,25 +193,76 @@
     </div>
 </footer>
 
-    <div id="chatFloat" class="fixed bottom-6 right-6 w-14 h-14 bg-red-600 rounded-full flex items-center justify-center text-white text-xl cursor-pointer z-[1000] shadow-lg hover:scale-110 transition-all">
-        <i class="fa fa-comment-dots"></i>
+<!-- chatbox -->
+    <div id="chatFloat" onclick="toggleChat()" 
+     class="fixed bottom-6 right-6 w-16 h-16 bg-gradient-to-tr from-red-600 to-red-800 rounded-full flex items-center justify-center text-white cursor-pointer z-[1000] shadow-[0_0_20px_rgba(220,38,38,0.5)] hover:scale-110 transition-all duration-300 group">
+    
+    <span class="absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75 animate-ping group-hover:hidden"></span>
+    
+    <div class="relative flex items-center justify-center">
+        <i class="fas fa-ticket-alt text-2xl rotate-[-20deg] group-hover:rotate-0 transition-transform duration-500"></i>
+        <span class="absolute -top-2 -right-2 bg-white text-red-600 text-[10px] font-black px-1.5 rounded-full border-2 border-red-600">!</span>
+    </div>
+</div>
+
+<div id="chatbox" 
+     class="fixed bottom-28 right-6 w-[380px] h-[550px] bg-zinc-950/95 backdrop-blur-2xl border border-white/10 rounded-3xl hidden flex-col overflow-hidden z-[1000] shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-500 transform translate-y-4">
+    
+    <div class="bg-gradient-to-r from-zinc-900 to-black p-5 border-b border-white/5 flex justify-between items-center relative overflow-hidden">
+        <div class="absolute -left-10 -top-10 w-32 h-32 bg-red-600/20 blur-3xl"></div>
+        
+        <div class="flex items-center gap-3 relative z-10">
+            <div class="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center shadow-lg shadow-red-600/30">
+                <i class="fas fa-robot text-white"></i>
+            </div>
+            <div>
+                <h4 class="text-white font-black text-xs uppercase tracking-widest">Cinema Assistant</h4>
+                <div class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    <span class="text-[10px] text-zinc-400 font-bold uppercase">Đang trực tuyến</span>
+                </div>
+            </div>
+        </div>
+        <button onclick="toggleChat()" class="text-zinc-500 hover:text-white transition-colors">
+            <i class="fas fa-times text-xl"></i>
+        </button>
     </div>
 
-    <div id="chatbox" class="fixed bottom-24 right-6 w-[350px] h-[500px] bg-[#0f0f0f]/95 backdrop-blur-xl border border-white/10 rounded-2xl hidden flex-col overflow-hidden z-[1000] shadow-2xl">
-        <div class="bg-red-600 p-4 flex justify-between items-center text-white">
-            <span class="font-bold text-sm flex items-center gap-2"><i class="fa fa-robot"></i> TRỢ LÝ CINEMA</span>
-            <span onclick="toggleChat()" class="cursor-pointer text-xl">&times;</span>
-        </div>
-        <div id="messages" class="flex-1 p-4 overflow-y-auto flex flex-col gap-2 scroller-thin text-sm">
-            <div class="self-start bg-white/10 text-white rounded-xl rounded-bl-none p-3 max-w-[85%] border border-white/5">Chào bạn! Mình có thể giúp gì cho bạn không?</div>
-        </div>
-        <div class="p-3 border-t border-white/5 bg-black/50 flex gap-2">
-            <input type="text" id="chatInput" class="flex-1 bg-white/5 border border-white/10 rounded-lg text-white p-2 px-3 text-xs outline-none focus:border-red-600" placeholder="Nhập tin nhắn...">
-            <button onclick="sendMessage()" class="text-red-600 px-2 hover:scale-110 transition-transform">
-                <i class="fa fa-paper-plane"></i>
-            </button>
+    <div id="messages" class="flex-1 p-5 overflow-y-auto flex flex-col gap-4 scroller-thin bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')]">
+        <div class="self-start flex gap-2 max-w-[85%] animate-fade-in-up">
+            <div class="bg-zinc-800/80 text-zinc-200 rounded-2xl rounded-tl-none p-3 text-sm border border-white/5 shadow-md">
+                Chào bạn! Bạn muốn tìm lịch chiếu phim hay đặt bắp nước nhỉ? 🍿
+            </div>
         </div>
     </div>
+
+    <div class="p-4 bg-zinc-900/50 border-t border-white/5">
+        <div class="relative flex items-center">
+            <input type="text" id="chatInput" 
+                   class="w-full bg-zinc-800/50 border border-white/10 rounded-2xl text-white py-3 pl-4 pr-12 text-sm outline-none focus:border-red-600/50 focus:ring-1 focus:ring-red-600/50 transition-all placeholder:text-zinc-500" 
+                   placeholder="Hỏi về phim, vé, ưu đãi...">
+            
+            <button onclick="sendMessage()" class="absolute right-2 w-9 h-9 flex items-center justify-center bg-red-600 hover:bg-red-500 text-white rounded-xl transition-all shadow-lg shadow-red-600/20">
+                <i class="fa fa-paper-plane text-xs"></i>
+            </button>
+        </div>
+        <p class="text-[9px] text-zinc-600 text-center mt-3 uppercase font-bold tracking-widest opacity-50">Powered by Cinema Pro AI</p>
+    </div>
+</div>
+
+<style>
+    /* Tùy chỉnh thanh cuộn cho đẹp */
+    .scroller-thin::-webkit-scrollbar { width: 4px; }
+    .scroller-thin::-webkit-scrollbar-track { background: transparent; }
+    .scroller-thin::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+    .scroller-thin::-webkit-scrollbar-thumb:hover { background: rgba(239, 68, 68, 0.5); }
+
+    @keyframes fade-in-up {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in-up { animation: fade-in-up 0.4s ease-out forwards; }
+</style>
 
     <script>
         function toggleChat() {
